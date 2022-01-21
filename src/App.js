@@ -27,15 +27,22 @@ function App() {
       const newTaskArray = [...taskArray, taskValue];
       setTaskArray(newTaskArray);
       setTaskValue("");
-      axios.post("https://react-todolist-jm.herokuapp.com/add-task", {
-        task: taskValue
-      })
+      axios.get("https://react-todolist-jm.herokuapp.com/")
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+      // axios.post("https://react-todolist-jm.herokuapp.com/add-task", {
+      //   task: taskValue
+      // })
+      // .then((response) => {
+      //   console.log(response);
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
     }
   };
   return (
