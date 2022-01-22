@@ -10,6 +10,15 @@ const Task = ({index, task, taskArray, setTaskArray, taskCompletedArray, setTask
         const newTaskArray = [...taskArray];
         newTaskArray.splice(index, 1);
         setTaskArray(newTaskArray);
+        axios.post("https://react-todolist-jm.herokuapp.com/delete-task", {
+            task: taskArray[index]
+          })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
     return (
         <div className='task'>
