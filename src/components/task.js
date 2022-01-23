@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const axios = require("axios");
+import axios from "axios";
 
 const Task = ({index, task, taskArray, setTaskArray, taskCompletedArray, setTaskCompletedArray}) => {
     const handleCompletion = (index) => {

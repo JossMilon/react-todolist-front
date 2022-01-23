@@ -1,24 +1,32 @@
 //Import CSS
 import "./App.css";
 
+import axios from "axios";
+
 //Import components
 import Task from "./components/task";
 
 //Import states
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 //FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 library.add(faTrashAlt);
 
-const axios = require("axios");
-
-
 function App() {
   const [taskValue, setTaskValue] = useState("");
   const [taskArray, setTaskArray] = useState([]);
   const [taskCompletedArray, setTaskCompletedArray] = useState([false]);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const fetchTask = async () => {
+      const response = await axios.get("https://react-todolist-jm.herokuapp.com/");
+      setTaskArray(response.data);
+      setIsLoading(false);
+    };
+    fetchTask();
+  }, []);
   const handleChange = (e) => {
     setTaskValue(e.target.value);
   };
@@ -39,6 +47,7 @@ function App() {
     }
   };
   return (
+    isLoading? <span>Wait for tasks to load</span>:
     <div className="container">
       <div className="tasksAdded">
         {taskArray.map((task, index) => {
